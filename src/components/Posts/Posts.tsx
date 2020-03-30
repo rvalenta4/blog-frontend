@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getPosts } from './actions'
 import Post from './Post'
 import { Row } from 'react-bootstrap'
-import { RootState } from '../../redux/rootReducer'
+import { RootState } from '../../redux/interfaces'
 
 const Posts = () => {
 	const posts = useSelector((state: RootState) => state.posts.posts)
