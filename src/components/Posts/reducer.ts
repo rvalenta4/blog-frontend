@@ -1,4 +1,4 @@
-import produce from 'immer'
+import produce, { Draft } from 'immer'
 import { PostActionTypes } from './enums'
 import { PostsState } from './interfaces'
 import { PostActions } from './types'
@@ -19,7 +19,7 @@ const initialState: PostsState = {
 }
 
 export const postsReducer = (state: PostsState = initialState, action: PostActions): PostsState => {
-	return produce(state, draft => {
+	return produce(state, (draft: Draft<PostsState>): void => {
 		switch (action.type) {
 			case PostActionTypes.POST_POST_STARTED: {
 				draft.postingPost = true
@@ -94,7 +94,7 @@ export const postsReducer = (state: PostsState = initialState, action: PostActio
 				break
 			}
 			default:
-				return state
+				break
 		}
 	})
 }
