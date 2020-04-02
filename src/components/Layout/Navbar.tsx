@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { getPosts } from '../Posts/actions'
 import { useDispatch } from 'react-redux'
@@ -8,7 +8,7 @@ import { FaSearch, FaArrowRight, FaUserPlus } from 'react-icons/fa'
 export default () => {
 	const dispatch = useDispatch()
 
-	const handleSearch = (e: React.SyntheticEvent<HTMLInputElement>): void => {
+	const handleSearch = (e: SyntheticEvent<HTMLInputElement>): void => {
 		getPosts(dispatch, e.currentTarget.value)
 	}
 

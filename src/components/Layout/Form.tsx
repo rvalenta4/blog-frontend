@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 
 export interface Field {
@@ -15,7 +15,7 @@ export default ({
 }: {
 	fields: Field[]
 	header: string
-	handleChange: (e: React.SyntheticEvent<HTMLInputElement>) => void
+	handleChange: (e: SyntheticEvent<HTMLInputElement>) => void
 }) => {
 	return (
 		<Card style={{ width: '30rem' }}>

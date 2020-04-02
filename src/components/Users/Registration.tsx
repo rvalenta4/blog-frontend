@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, SyntheticEvent } from 'react'
 import Form, { Field } from '../Layout/Form'
 
 interface Registration {
@@ -26,7 +26,7 @@ export default function Registration() {
 		password: ''
 	})
 
-	const handleChange = (e: React.SyntheticEvent<HTMLInputElement>): void => {
+	const handleChange = (e: SyntheticEvent<HTMLInputElement>): void => {
 		const { name, value } = e.currentTarget
 		setState({ ...state, [name]: value })
 	}
