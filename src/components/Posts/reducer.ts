@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { PostActionTypes } from './enums'
 import { PostsState } from './interfaces'
 import { PostActions } from './types'
@@ -18,61 +19,84 @@ const initialState: PostsState = {
 }
 
 export const postsReducer = (state: PostsState = initialState, action: PostActions): PostsState => {
-	switch (action.type) {
-		case PostActionTypes.POST_POST_STARTED: {
-			return { ...state, postingPost: true }
+	return produce(state, draft => {
+		switch (action.type) {
+			case PostActionTypes.POST_POST_STARTED: {
+				draft.postingPost = true
+				break
+			}
+			case PostActionTypes.POST_POST_SUCCEEDED: {
+				draft.postingPost = false
+				draft.posts.push(action.payload)
+				break
+			}
+			case PostActionTypes.POST_POST_FAILED: {
+				draft.postingPost = false
+				draft.postPostError = action.payload
+				break
+			}
+			case PostActionTypes.GET_POSTS_STARTED: {
+				draft.gettingPosts = true
+				break
+			}
+			case PostActionTypes.GET_POSTS_SUCCEEDED: {
+				draft.gettingPosts = false
+				draft.posts = action.payload
+				break
+			}
+			case PostActionTypes.GET_POSTS_FAILED: {
+				draft.gettingPosts = false
+				draft.getPostError = action.payload
+				break
+			}
+			case PostActionTypes.GET_POST_STARTED: {
+				draft.gettingPost = true
+				break
+			}
+			case PostActionTypes.GET_POST_SUCCEEDED: {
+				draft.gettingPost = false
+				draft.post = action.payload
+				break
+			}
+			case PostActionTypes.GET_POST_FAILED: {
+				draft.gettingPost = false
+				draft.getPostError = action.payload
+				break
+			}
+			case PostActionTypes.PATCH_POST_STARTED: {
+				draft.patchingPost = true
+				break
+			}
+			case PostActionTypes.PATCH_POST_SUCCEEDED: {
+				const index = state.posts.findIndex(post => post.id === action.payload.id)
+				draft.patchingPost = false
+				draft.posts[index] = action.payload
+				break
+			}
+			case PostActionTypes.PATCH_POST_FAILED: {
+				draft.patchingPost = false
+				draft.postPostError = action.payload
+				break
+			}
+			case PostActionTypes.DELETE_POST_STARTED: {
+				draft.deletingPost = true
+				break
+			}
+			case PostActionTypes.DELETE_POST_SUCCEEDED: {
+				const index = state.posts.findIndex(post => post.id === action.payload.id)
+				draft.deletingPost = false
+				draft.posts.splice(index, 1)
+				break
+			}
+			case PostActionTypes.DELETE_POST_FAILED: {
+				draft.deletingPost = false
+				draft.deletePostError = action.payload
+				break
+			}
+			default:
+				return state
 		}
-		case PostActionTypes.POST_POST_SUCCEEDED: {
-			return { ...state, postingPost: false, posts: [...state.posts, action.payload] }
-		}
-		case PostActionTypes.POST_POST_FAILED: {
-			return { ...state, postingPost: false, postPostError: action.payload }
-		}
-		case PostActionTypes.GET_POSTS_STARTED: {
-			return { ...state, gettingPosts: true }
-		}
-		case PostActionTypes.GET_POSTS_SUCCEEDED: {
-			return { ...state, gettingPosts: false, posts: action.payload }
-		}
-		case PostActionTypes.GET_POSTS_FAILED: {
-			return { ...state, gettingPosts: false, getPostError: action.payload }
-		}
-		case PostActionTypes.GET_POST_STARTED: {
-			return { ...state, gettingPost: true }
-		}
-		case PostActionTypes.GET_POST_SUCCEEDED: {
-			return { ...state, gettingPost: false, post: action.payload }
-		}
-		case PostActionTypes.GET_POST_FAILED: {
-			return { ...state, gettingPost: false, getPostError: action.payload }
-		}
-		case PostActionTypes.PATCH_POST_STARTED: {
-			return { ...state, patchingPost: true }
-		}
-		case PostActionTypes.PATCH_POST_SUCCEEDED: {
-			const index = state.posts.findIndex(post => post.id === action.payload.id)
-			const newPosts = [...state.posts]
-			newPosts[index] = action.payload
-			return { ...state, patchingPost: false, posts: newPosts }
-		}
-		case PostActionTypes.PATCH_POST_FAILED: {
-			return { ...state, patchingPost: false, postPostError: action.payload }
-		}
-		case PostActionTypes.DELETE_POST_STARTED: {
-			return { ...state, deletingPost: true }
-		}
-		case PostActionTypes.DELETE_POST_SUCCEEDED: {
-			const index = state.posts.findIndex(post => post.id === action.payload.id)
-			const newPosts = [...state.posts]
-			newPosts.splice(index, 1)
-			return { ...state, deletingPost: false, posts: newPosts }
-		}
-		case PostActionTypes.DELETE_POST_FAILED: {
-			return { ...state, deletingPost: false, deletePostError: action.payload }
-		}
-		default:
-			return state
-	}
+	})
 }
 
 export default postsReducer
