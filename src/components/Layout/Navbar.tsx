@@ -3,6 +3,7 @@ import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { getPosts } from '../Posts/actions'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { FaSearch, FaArrowRight, FaUserPlus } from 'react-icons/fa'
 
 export default () => {
 	const dispatch = useDispatch()
@@ -21,16 +22,20 @@ export default () => {
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
 						<Nav.Link as={Link} to='/login'>
-							Login
+							<FaArrowRight className='mb-1'/>
+							<span className='ml-2'>Login</span>
 						</Nav.Link>
 						<Nav.Link as={Link} to='registration'>
-							Registration
+							<FaUserPlus className='mb-1' />
+							<span className='ml-2'>Registration</span>
 						</Nav.Link>
 					</Nav>
 					<Form inline>
 						<InputGroup>
 							<InputGroup.Prepend>
-								<InputGroup.Text id='basic-addon1'>@</InputGroup.Text>
+								<InputGroup.Text id='basic-addon1'>
+									<FaSearch />
+								</InputGroup.Text>
 							</InputGroup.Prepend>
 							<FormControl
 								type='text'
