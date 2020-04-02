@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react'
-import { Navigation } from './Navbar'
+import Navbar from './Navbar'
 import { Container } from 'react-bootstrap'
 
 const Layout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
-			<Navigation />
-			<Container>{children}</Container>
+			<Navbar />
+			<Container className='d-flex justify-content-center py-4'>{children}</Container>
 		</>
 	)
 }

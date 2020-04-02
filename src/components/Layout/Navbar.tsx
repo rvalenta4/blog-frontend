@@ -4,7 +4,7 @@ import { getPosts } from '../Posts/actions'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export const Navigation = () => {
+export default () => {
 	const dispatch = useDispatch()
 
 	const handleSearch = (e: React.SyntheticEvent<HTMLInputElement>): void => {
@@ -14,13 +14,12 @@ export const Navigation = () => {
 	return (
 		<div>
 			<Navbar bg='light' expand='lg'>
-				<Navbar.Brand>Roman's Blog</Navbar.Brand>
+				<Navbar.Brand as={Link} to='/'>
+					Roman's Blog
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
-						<Nav.Link as={Link} to='/'>
-							Posts
-						</Nav.Link>
 						<Nav.Link as={Link} to='/login'>
 							Login
 						</Nav.Link>

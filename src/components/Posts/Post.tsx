@@ -12,7 +12,7 @@ export default function Post({ post }: { post: PostType }) {
 				<Card.Text>{post.body}</Card.Text>
 			</Card.Body>
 			<Card.Footer>
-				<Button>Bookmark</Button>
+				<Button>Read</Button>
 			</Card.Footer>
 		</Card>
 	)
