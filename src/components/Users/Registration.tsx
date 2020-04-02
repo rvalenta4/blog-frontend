@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Card, Button } from 'react-bootstrap'
 
-interface RegistrationType {
+interface Registration {
 	name: string
 	surname: string
 	username: string
@@ -10,7 +10,7 @@ interface RegistrationType {
 }
 
 export default function Registration() {
-	const [state, setState]: [RegistrationType, Function] = useState({
+	const [state, setState]: [Registration, Function] = useState({
 		name: '',
 		surname: '',
 		username: '',
@@ -24,8 +24,8 @@ export default function Registration() {
 	}
 
 	return (
-		<Card>
-			<Card.Header style={{ fontWeight: 'bold' }}>Registration form</Card.Header>
+		<Card className='mt-5'>
+			<Card.Header className='font-weight-bold'>Registration form</Card.Header>
 			<Card.Body>
 				<Form>
 					<Form.Group controlId='formGroupName'>
@@ -38,7 +38,7 @@ export default function Registration() {
 							onChange={handleChange}
 						/>
 					</Form.Group>
-					<Form.Group controlId='formGroupEmail'>
+					<Form.Group controlId='formGroupSurname'>
 						<Form.Label>Surname</Form.Label>
 						<Form.Control
 							value={state.surname}
