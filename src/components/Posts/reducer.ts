@@ -93,8 +93,9 @@ export const postsReducer = (state: PostsState = initialState, action: PostActio
 				draft.deletePostError = action.payload
 				break
 			}
-			default:
+			default: {
 				break
+			}
 		}
 	})
 }
