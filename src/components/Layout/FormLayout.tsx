@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React, { SyntheticEvent, FC } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 
 export interface Field {
@@ -8,15 +8,13 @@ export interface Field {
 	type: string
 }
 
-export default ({
-	header,
-	fields,
-	handleChange
-}: {
+interface Props {
 	fields: Field[]
 	header: string
 	handleChange: (e: SyntheticEvent<HTMLInputElement>) => void
-}) => {
+}
+
+export const FormLayout: FC<Props> = ({ header, fields, handleChange }) => {
 	return (
 		<Card style={{ width: '30rem' }}>
 			<Card.Header style={{ fontWeight: 'bold' }}>{header}</Card.Header>
@@ -41,3 +39,5 @@ export default ({
 		</Card>
 	)
 }
+
+export default FormLayout

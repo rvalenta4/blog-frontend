@@ -3,17 +3,17 @@ import React from 'react'
 import Posts from './components/Posts/Posts'
 import Login from './components/Users/Login'
 import Registration from './components/Users/Registration'
-import Layout from './components/Layout/Layout'
+import PageLayout from './components/Layout/PageLayout'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 const App = () => {
 	return (
 		<Router>
-			<Layout>
+			<PageLayout>
 				<Route exact path='/' component={Posts} />
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/registration' component={Registration} />
-			</Layout>
+			</PageLayout>
 		</Router>
 	)
 }

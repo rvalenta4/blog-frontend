@@ -1,5 +1,5 @@
-import React, { useState, SyntheticEvent } from 'react'
-import Form, { Field } from '../Layout/Form'
+import React, { useState, SyntheticEvent, FC } from 'react'
+import FormLayout, { Field } from '../Layout/FormLayout'
 
 interface Registration {
 	name: string
@@ -17,7 +17,7 @@ const fields: Field[] = [
 	{ controlId: 'formGroupPassword', type: 'password', label: 'Password', name: 'password' }
 ]
 
-export default function Registration() {
+const Registration: FC = () => {
 	const [state, setState]: [Registration, Function] = useState({
 		name: '',
 		surname: '',
@@ -31,5 +31,7 @@ export default function Registration() {
 		setState({ ...state, [name]: value })
 	}
 
-	return <Form fields={fields} header='Registration' handleChange={handleChange} />
+	return <FormLayout fields={fields} header='Registration' handleChange={handleChange} />
 }
+
+export default Registration

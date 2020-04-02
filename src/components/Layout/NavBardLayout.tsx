@@ -1,11 +1,11 @@
-import React, { SyntheticEvent } from 'react'
+import React, { SyntheticEvent, FC } from 'react'
 import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap'
 import { getPosts } from '../Posts/actions'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaArrowRight, FaUserPlus } from 'react-icons/fa'
 
-export default () => {
+const NavbarLayout: FC = () => {
 	const dispatch = useDispatch()
 
 	const handleSearch = (e: SyntheticEvent<HTMLInputElement>): void => {
@@ -22,7 +22,7 @@ export default () => {
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
 						<Nav.Link as={Link} to='/login'>
-							<FaArrowRight className='mb-1'/>
+							<FaArrowRight className='mb-1' />
 							<span className='ml-2'>Login</span>
 						</Nav.Link>
 						<Nav.Link as={Link} to='registration'>
@@ -50,3 +50,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default NavbarLayout

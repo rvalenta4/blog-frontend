@@ -1,17 +1,17 @@
-import React, { useState, SyntheticEvent } from 'react'
-import Form, { Field } from '../Layout/Form'
-
-interface Login {
-	email: string
-	password: string
-}
+import React, { useState, SyntheticEvent, FC } from 'react'
+import FormLayout, { Field } from '../Layout/FormLayout'
 
 const fields: Field[] = [
 	{ controlId: 'formGroupEmail', type: 'email', label: 'Email', name: 'email' },
 	{ controlId: 'formGroupPassword', type: 'password', label: 'Password', name: 'password' }
 ]
 
-export default function Login() {
+interface Login {
+	email: string
+	password: string
+}
+
+const Login: FC = () => {
 	const [state, setState]: [Login, Function] = useState({
 		email: '',
 		password: ''
@@ -22,5 +22,7 @@ export default function Login() {
 		setState({ ...state, [name]: value })
 	}
 
-	return <Form fields={fields} header='Login' handleChange={handleChange} />
+	return <FormLayout fields={fields} header='Login' handleChange={handleChange} />
 }
+
+export default Login

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { PostType } from './interfaces'
 import moment from 'moment'
 
-export default function Post({ post }: { post: PostType }) {
+interface Props {
+	post: PostType
+}
+
+const Post: FC<Props> = ({ post }) => {
 	return (
 		<Card style={{ width: '20rem', margin: '1rem' }}>
 			<Card.Header>{moment(post.createdAt).format('MM-DD-YYYY')}</Card.Header>
@@ -17,3 +21,5 @@ export default function Post({ post }: { post: PostType }) {
 		</Card>
 	)
 }
+
+export default Post
