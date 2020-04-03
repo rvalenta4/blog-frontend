@@ -1,5 +1,5 @@
 import { PostsState } from '../components/Posts/interfaces'
 
-export interface RootState {
+export interface IState {
 	posts: PostsState
 }

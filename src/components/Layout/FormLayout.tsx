@@ -1,20 +1,20 @@
 import React, { SyntheticEvent, FC } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 
-export interface Field {
+export interface IField {
 	name: string
 	controlId: string
 	label: string
 	type: string
 }
 
-interface Props {
-	fields: Field[]
+interface IProps {
+	fields: IField[]
 	header: string
 	handleChange: (e: SyntheticEvent<HTMLInputElement>) => void
 }
 
-export const FormLayout: FC<Props> = ({ header, fields, handleChange }) => {
+export const FormLayout: FC<IProps> = ({ header, fields, handleChange }) => {
 	return (
 		<Card style={{ width: '30rem' }}>
 			<Card.Header style={{ fontWeight: 'bold' }}>{header}</Card.Header>

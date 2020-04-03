@@ -1,4 +1,4 @@
-export enum PostActionTypes {
+export enum EPostActions {
 	POST_POST_STARTED = 'POST_POST_STARTED',
 	POST_POST_SUCCEEDED = 'POST_POST_SUCCEEDED',
 	POST_POST_FAILED = 'POST_POST_FAILED',

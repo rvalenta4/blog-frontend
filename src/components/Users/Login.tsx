@@ -1,18 +1,18 @@
 import React, { useState, SyntheticEvent, FC } from 'react'
-import FormLayout, { Field } from '../Layout/FormLayout'
+import FormLayout, { IField } from '../Layout/FormLayout'
 
-const fields: Field[] = [
+const fields: IField[] = [
 	{ controlId: 'formGroupEmail', type: 'email', label: 'Email', name: 'email' },
 	{ controlId: 'formGroupPassword', type: 'password', label: 'Password', name: 'password' }
 ]
 
-interface Login {
+interface ILogin {
 	email: string
 	password: string
 }
 
 const Login: FC = () => {
-	const [state, setState]: [Login, Function] = useState({
+	const [state, setState]: [ILogin, Function] = useState({
 		email: '',
 		password: ''
 	})

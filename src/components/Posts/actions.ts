@@ -1,113 +1,101 @@
 import axios from 'axios'
 import { Dispatch } from 'react'
-import {
-	PostType,
-	GetPostsStarted,
-	GetPostsSucceeded,
-	GetPostsFailed,
-	GetPostStarted,
-	GetPostSucceeded,
-	GetPostFailed,
-	PostPostStarted,
-	PostPostSucceeded,
-	PostPostFailed,
-	PatchPostStarted,
-	PatchPostSucceeded,
-	PatchPostFailed,
-	DeletePostStarted,
-	DeletePostSucceeded,
-	DeletePostFailed
-} from './interfaces'
+import { IPost, IAction } from './interfaces'
 import API from '../../api'
-import { PostActionTypes } from './enums'
-import { PostActions } from './types'
+import { EPostActions } from './enums'
+import { TPostPost, TGetPosts, TGetPost, TPatchPost, TDeletePost } from './types'
 
-export const postPostStarted = (): PostPostStarted => ({
-	type: PostActionTypes.POST_POST_STARTED
+export const postPostStarted = (): IAction<EPostActions.POST_POST_STARTED, null> => ({
+	type: EPostActions.POST_POST_STARTED,
+	payload: null
 })
 
-export const postPostSucceeded = (post: PostType): PostPostSucceeded => ({
-	type: PostActionTypes.POST_POST_SUCCEEDED,
+export const postPostSucceeded = (post: IPost): IAction<EPostActions.POST_POST_SUCCEEDED, IPost> => ({
+	type: EPostActions.POST_POST_SUCCEEDED,
 	payload: post
 })
 
-export const postPostFailed = (error: Error): PostPostFailed => ({
-	type: PostActionTypes.POST_POST_FAILED,
+export const postPostFailed = (error: Error): IAction<EPostActions.POST_POST_FAILED, Error> => ({
+	type: EPostActions.POST_POST_FAILED,
 	payload: error
 })
 
-export const getPostsStarted = (): GetPostsStarted => ({
-	type: PostActionTypes.GET_POSTS_STARTED
+export const getPostsStarted = (): IAction<EPostActions.GET_POSTS_STARTED, null> => ({
+	type: EPostActions.GET_POSTS_STARTED,
+	payload: null
 })
 
-export const getPostsSucceeded = (posts: PostType[]): GetPostsSucceeded => ({
-	type: PostActionTypes.GET_POSTS_SUCCEEDED,
+export const getPostsSucceeded = (posts: IPost[]): IAction<EPostActions.GET_POSTS_SUCCEEDED, IPost[]> => ({
+	type: EPostActions.GET_POSTS_SUCCEEDED,
 	payload: posts
 })
 
-export const getPostsFailed = (error: Error): GetPostsFailed => ({
-	type: PostActionTypes.GET_POSTS_FAILED,
+export const getPostsFailed = (error: Error): IAction<EPostActions.GET_POSTS_FAILED, Error> => ({
+	type: EPostActions.GET_POSTS_FAILED,
 	payload: error
 })
 
-export const getPostStarted = (): GetPostStarted => ({
-	type: PostActionTypes.GET_POST_STARTED
+export const getPostStarted = (): IAction<EPostActions.GET_POST_STARTED, null> => ({
+	type: EPostActions.GET_POST_STARTED,
+	payload: null
 })
 
-export const getPostSucceeded = (post: PostType): GetPostSucceeded => ({
-	type: PostActionTypes.GET_POST_SUCCEEDED,
+export const getPostSucceeded = (post: IPost): IAction<EPostActions.GET_POST_SUCCEEDED, IPost> => ({
+	type: EPostActions.GET_POST_SUCCEEDED,
 	payload: post
 })
 
-export const getPostFailed = (error: Error): GetPostFailed => ({
-	type: PostActionTypes.GET_POST_FAILED,
+export const getPostFailed = (error: Error): IAction<EPostActions.GET_POST_FAILED, Error> => ({
+	type: EPostActions.GET_POST_FAILED,
 	payload: error
 })
 
-export const patchPostStarted = (): PatchPostStarted => ({
-	type: PostActionTypes.PATCH_POST_STARTED
+export const patchPostStarted = (): IAction<EPostActions.PATCH_POST_STARTED, null> => ({
+	type: EPostActions.PATCH_POST_STARTED,
+	payload: null
 })
 
-export const patchPostSucceeded = (post: PostType): PatchPostSucceeded => ({
-	type: PostActionTypes.PATCH_POST_SUCCEEDED,
+export const patchPostSucceeded = (post: IPost): IAction<EPostActions.PATCH_POST_SUCCEEDED, IPost> => ({
+	type: EPostActions.PATCH_POST_SUCCEEDED,
 	payload: post
 })
 
-export const patchPostFailed = (error: Error): PatchPostFailed => ({
-	type: PostActionTypes.PATCH_POST_FAILED,
+export const patchPostFailed = (error: Error): IAction<EPostActions.PATCH_POST_FAILED, Error> => ({
+	type: EPostActions.PATCH_POST_FAILED,
 	payload: error
 })
 
-export const deletePostStarted = (): DeletePostStarted => ({
-	type: PostActionTypes.DELETE_POST_STARTED
+export const deletePostStarted = (): IAction<EPostActions.DELETE_POST_STARTED, null> => ({
+	type: EPostActions.DELETE_POST_STARTED,
+	payload: null
 })
 
-export const deletePostSucceeded = (post: PostType): DeletePostSucceeded => ({
-	type: PostActionTypes.DELETE_POST_SUCCEEDED,
+export const deletePostSucceeded = (post: IPost): IAction<EPostActions.DELETE_POST_SUCCEEDED, IPost> => ({
+	type: EPostActions.DELETE_POST_SUCCEEDED,
 	payload: post
 })
 
-export const deletePostFailed = (error: Error): DeletePostFailed => ({
-	type: PostActionTypes.DELETE_POST_FAILED,
+export const deletePostFailed = (error: Error): IAction<EPostActions.DELETE_POST_FAILED, Error> => ({
+	type: EPostActions.DELETE_POST_FAILED,
 	payload: error
 })
 
-export const postPost = async (dispatch: Dispatch<PostActions>): Promise<void> => {
+export const postPost = async (dispatch: Dispatch<TPostPost>): Promise<void> => {
 	dispatch(postPostStarted())
 
 	try {
-		const { data: post }: { data: PostType } = await axios.post(`${API}/posts/`)
+		const { data: post }: { data: IPost } = await axios.post(`${API}/posts/`)
 		dispatch(postPostSucceeded(post))
 	} catch (error) {
 		dispatch(postPostFailed(error))
 	}
 }
 
-export const getPosts = async (dispatch: Dispatch<PostActions>, search?: string): Promise<void> => {
+export const getPosts = async (dispatch: Dispatch<TGetPosts>, search?: string): Promise<void> => {
 	dispatch(getPostsStarted())
 
 	try {
-		const { data: posts }: { data: PostType[] } = search
+		const { data: posts }: { data: IPost[] } = search
 			? await axios.get(`${API}/posts`, { params: { search } })
 			: await axios.get(`${API}/posts`)
 
@@ -117,33 +105,33 @@ export const getPosts = async (dispatch: Dispatch<PostActions>, search?: string)
 	}
 }
 
-export const getPost = async (dispatch: Dispatch<PostActions>, id: string): Promise<void> => {
+export const getPost = async (dispatch: Dispatch<TGetPost>, id: string): Promise<void> => {
 	dispatch(getPostStarted())
 
 	try {
-		const { data: post }: { data: PostType } = await axios.get(`${API}/posts/${id}`)
+		const { data: post }: { data: IPost } = await axios.get(`${API}/posts/${id}`)
 		dispatch(getPostSucceeded(post))
 	} catch (error) {
 		dispatch(getPostFailed(error))
 	}
 }
 
-export const patchPost = async (dispatch: Dispatch<PostActions>, id: string): Promise<void> => {
+export const patchPost = async (dispatch: Dispatch<TPatchPost>, id: string): Promise<void> => {
 	dispatch(patchPostStarted())
 
 	try {
-		const { data: post }: { data: PostType } = await axios.patch(`${API}/posts/${id}`)
+		const { data: post }: { data: IPost } = await axios.patch(`${API}/posts/${id}`)
 		dispatch(patchPostSucceeded(post))
 	} catch (error) {
 		dispatch(patchPostFailed(error))
 	}
 }
 
-export const deletePost = async (dispatch: Dispatch<PostActions>, id: string): Promise<void> => {
+export const deletePost = async (dispatch: Dispatch<TDeletePost>, id: string): Promise<void> => {
 	dispatch(deletePostStarted())
 
 	try {
-		const { data: post }: { data: PostType } = await axios.delete(`${API}/posts/${id}`)
+		const { data: post }: { data: IPost } = await axios.delete(`${API}/posts/${id}`)
 		dispatch(deletePostSucceeded(post))
 	} catch (error) {
 		dispatch(deletePostFailed(error))

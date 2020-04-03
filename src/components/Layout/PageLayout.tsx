@@ -2,11 +2,11 @@ import React, { ReactNode, FC } from 'react'
 import NavbarLayout from './NavBardLayout'
 import { Container } from 'react-bootstrap'
 
-interface Props {
+interface IProps {
 	children: ReactNode
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<IProps> = ({ children }) => {
 	return (
 		<>
 			<NavbarLayout />

@@ -1,7 +1,7 @@
 import React, { useState, SyntheticEvent, FC } from 'react'
-import FormLayout, { Field } from '../Layout/FormLayout'
+import FormLayout, { IField } from '../Layout/FormLayout'
 
-interface Registration {
+interface IRegistration {
 	name: string
 	surname: string
 	username: string
@@ -9,7 +9,7 @@ interface Registration {
 	password: string
 }
 
-const fields: Field[] = [
+const fields: IField[] = [
 	{ controlId: 'formGroupName', type: 'text', label: 'Name', name: 'name' },
 	{ controlId: 'formGroupSurname', type: 'text', label: 'Surname', name: 'surname' },
 	{ controlId: 'formGroupUsername', type: 'text', label: 'Username', name: 'username' },
@@ -18,7 +18,7 @@ const fields: Field[] = [
 ]
 
 const Registration: FC = () => {
-	const [state, setState]: [Registration, Function] = useState({
+	const [state, setState]: [IRegistration, Function] = useState({
 		name: '',
 		surname: '',
 		username: '',

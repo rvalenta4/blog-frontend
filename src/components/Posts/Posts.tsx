@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getPosts } from './actions'
 import Post from './Post'
 import { Row } from 'react-bootstrap'
-import { RootState } from '../../redux/interfaces'
+import { IState } from '../../redux/interfaces'
 
 const Posts: FC = () => {
-	const posts = useSelector((state: RootState) => state.posts.posts)
+	const posts = useSelector((state: IState) => state.posts.posts)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
