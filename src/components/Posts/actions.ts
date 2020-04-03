@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { Dispatch } from 'react'
 import { IPost, IAction } from './interfaces'
 import API from '../../api'
 import { EPostActions } from './enums'
 import { TPostPost, TGetPosts, TGetPost, TPatchPost, TDeletePost } from './types'
+import { Dispatch } from 'redux'
 
 export const postPostStarted = (): IAction<EPostActions.POST_POST_STARTED, null> => ({
 	type: EPostActions.POST_POST_STARTED,
@@ -80,7 +80,7 @@ export const deletePostFailed = (error: Error): IAction<EPostActions.DELETE_POST
 	payload: error
 })
 
-export const postPost = async (dispatch: Dispatch<TPostPost>): Promise<void> => {
+export const postPost = () => async (dispatch: Dispatch<TPostPost>): Promise<void> => {
 	dispatch(postPostStarted())
 
 	try {
@@ -91,7 +91,7 @@ export const postPost = async (dispatch: Dispatch<TPostPost>): Promise<void> => 
 	}
 }
 
-export const getPosts = async (dispatch: Dispatch<TGetPosts>, search?: string): Promise<void> => {
+export const getPosts = (search?: string) => async (dispatch: Dispatch<TGetPosts>): Promise<void> => {
 	dispatch(getPostsStarted())
 
 	try {
@@ -105,7 +105,7 @@ export const getPosts = async (dispatch: Dispatch<TGetPosts>, search?: string): 
 	}
 }
 
-export const getPost = async (dispatch: Dispatch<TGetPost>, id: string): Promise<void> => {
+export const getPost = (id: string) => async (dispatch: Dispatch<TGetPost>): Promise<void> => {
 	dispatch(getPostStarted())
 
 	try {
@@ -116,7 +116,7 @@ export const getPost = async (dispatch: Dispatch<TGetPost>, id: string): Promise
 	}
 }
 
-export const patchPost = async (dispatch: Dispatch<TPatchPost>, id: string): Promise<void> => {
+export const patchPost = (id: string) => async (dispatch: Dispatch<TPatchPost>): Promise<void> => {
 	dispatch(patchPostStarted())
 
 	try {
@@ -127,7 +127,7 @@ export const patchPost = async (dispatch: Dispatch<TPatchPost>, id: string): Pro
 	}
 }
 
-export const deletePost = async (dispatch: Dispatch<TDeletePost>, id: string): Promise<void> => {
+export const deletePost = (id: string) => async (dispatch: Dispatch<TDeletePost>): Promise<void> => {
 	dispatch(deletePostStarted())
 
 	try {

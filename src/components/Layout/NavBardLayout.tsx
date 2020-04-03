@@ -9,7 +9,7 @@ const NavbarLayout: FC = () => {
 	const dispatch = useDispatch()
 
 	const handleSearch = (e: SyntheticEvent<HTMLInputElement>): void => {
-		getPosts(dispatch, e.currentTarget.value)
+		dispatch(getPosts(e.currentTarget.value))
 	}
 
 	return (
