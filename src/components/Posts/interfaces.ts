@@ -5,8 +5,8 @@ export interface IPost {
 	createdAt: number
 }
 
-export interface IAction<PostActionTypes, Payload> {
-	type: PostActionTypes
+export interface IAction<Type, Payload> {
+	type: Type
 	payload: Payload
 }
 
