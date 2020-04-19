@@ -18,7 +18,7 @@ const Posts: FC = () => {
 	return gettingPosts ? (
 		<Spinner animation='grow' />
 	) : (
-		<Row>{posts && posts.map(post => <Post key={post.id} post={post} />)}</Row>
+		<Row>{posts && posts.map((post) => <Post key={post.id} post={post} isGrid />)}</Row>
 	)
 }
 
